@@ -1,0 +1,27 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+   <Frame name="TotalBuyout_Frame" inherits="SmallMoneyFrameTemplate" toplevel="true" hidden="true" anchorPoint="TOPRIGHT">
+        <Anchors><Anchor point="TOPRIGHT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+        <Scripts>
+            <OnLoad>
+                SmallMoneyFrame_OnLoad( self )
+                MoneyFrame_SetType(self, "AUCTION")
+                TotalBuyout_OnLoad( self )
+            </OnLoad>
+            <OnShow>
+                if (AuctionFrame and AuctionFrame:IsShown()) then
+                    self:SetParent('AuctionFrame');
+                    self:ClearAllPoints ();
+                    self:SetPoint ("TOP", "AuctionFrame", "TOP", 0, -18);
+                    self:SetPoint("RIGHT", "AuctionFrame", "RIGHT", -20, 0);
+                    TotalBuyout_Frame:Show();
+                end;
+            </OnShow>
+            <OnHide>
+                self:SetParent('UIParent');
+            </OnHide>
+            <OnEvent>
+                TotalBuyout_EventHandler(self, event, ...) 
+            </OnEvent>
+        </Scripts>
+    </Frame>
+</Ui>
